@@ -1,0 +1,285 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>移动测试--adb命令使用 | Theo&#39;s Blogs</title>
+<link rel="shortcut icon" href="https://theotop97.github.io/favicon.ico?v=1621180015669">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://theotop97.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="移动测试--adb命令使用 | Theo&#39;s Blogs - Atom Feed" href="https://theotop97.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="简介
+adb ( Android Debug Bridge)是一个通用命令行工具，其允许您与模拟器实例或连接的 Android 设备进行通信。它可为各种设备操作提供便利，如安装和调试应用。
+配置
+需要配置adb环境，根据个人机器和喜好配置即..." />
+    <meta name="keywords" content="Android,Test" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://theotop97.github.io">
+  <img class="avatar" src="https://theotop97.github.io/images/avatar.png?v=1621180015669" alt="">
+  </a>
+  <h1 class="site-title">
+    Theo&#39;s Blogs
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              移动测试--adb命令使用
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-05-15
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://theotop97.github.io/tag/FARzCQ5rR/" class="post-tag">
+                  # Android
+                </a>
+              
+                <a href="https://theotop97.github.io/tag/EvORVWVs0/" class="post-tag">
+                  # Test
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="简介">简介</h1>
+<p>adb ( Android Debug Bridge)是一个通用命令行工具，其允许您与模拟器实例或连接的 Android 设备进行通信。它可为各种设备操作提供便利，如安装和调试应用。</p>
+<h1 id="配置">配置</h1>
+<p>需要配置adb环境，根据个人机器和喜好配置即可。</p>
+<h1 id="常用命令">常用命令</h1>
+<p><strong>启停服务</strong></p>
+<ul>
+<li><code>adb kill-server</code></li>
+<li><code>adb start-server</code></li>
+</ul>
+<p><strong>查看已连接的设备</strong></p>
+<ul>
+<li><code>adb devices</code></li>
+</ul>
+<p><strong>获取设备的状态</strong></p>
+<ul>
+<li>
+<p><code>adb get-state</code></p>
+<blockquote>
+<p>设备的状态有 3 种：</p>
+<p>​		<code>device</code>：设备正常连接</p>
+<p>​		<code>offline</code>：连接出现异常，设备无响应</p>
+<p>​		<code>unknown</code>：没有连接设备</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>查看设备安装的应用</strong></p>
+<ul>
+<li>
+<p><code>adb shell pm list package xxx(应用名</code></p>
+<ul>
+<li>-s: 列出系统应用</li>
+<li>-3: 列出第三方应用</li>
+<li>-f: 列出应用包名及对应的apk名及存放位置</li>
+<li>-i: 列出应用包名及其安装来源，结果显示例子</li>
+</ul>
+<blockquote>
+<p>命令最后增加 FILTER：过滤关键字，可以很方便地查找自己想要的应用</p>
+<pre><code class="language-shell">adb shell pm list package -f -3 -i qq  
+
+package:/mnt/asec/com.tencent.mobileqq-bkqW0nLSfyRsIjb5/base.apk=com.tencent.mobileqq installer=com.samsung.android.packageinstaller
+</code></pre>
+</blockquote>
+</li>
+<li>
+<p><code>pm path</code> 列出对应包名的 .apk 位置</p>
+<pre><code class="language-shell">adb shell pm path com.tencent.mobileqq
+package:/mnt/asec/com.tencent.mobileqq-bkqW0nLSfyRsIjb5/base.apk
+</code></pre>
+</li>
+</ul>
+<p><strong>给设备安装应用</strong></p>
+<ul>
+<li>
+<p><code>adb install</code></p>
+<blockquote>
+<p><code>-r:</code> 覆盖原安装文件</p>
+<p><code>-s:</code>指定设备</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>默认安装</strong></p>
+<p><code>adb install /xxxxx/xxxxx/xxx.apk</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>卸载设备应用</strong></p>
+<ul>
+<li>
+<p><code>adb uninstall packagename</code></p>
+<blockquote>
+<p>adb uninstall com.tencent.mobileqq</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>文件从PC push到设备</strong></p>
+<ul>
+<li><code>adb push /Users/kyb.txt /sdcard</code></li>
+</ul>
+<p><strong>文件从设备pull到PC</strong></p>
+<ul>
+<li><code>adb pull /sdcard/server.log /Users</code></li>
+</ul>
+<blockquote>
+<p>图片不要用<code>.jpg</code></p>
+</blockquote>
+<p><strong>屏幕截图</strong></p>
+<ul>
+<li><code>adb shell screencap 截图存放截图位置</code></li>
+</ul>
+<blockquote>
+<p><code>adb shell screencap /sdcard/screen.png</code></p>
+</blockquote>
+<p><strong>dumpsys工具</strong></p>
+<ul>
+<li>
+<p>activity栈信息：<code>adb shell dumpsys activity</code></p>
+<blockquote>
+<p>查看当前活动的Activity</p>
+<pre><code class="language-shell">adb shell dumpsys window windows | grep &quot;mCurrentFocus&quot;
+mCurrentFocus=Window{7ba82b1 u0 com.tencent.mobileqq/com.tencent.mobileqq.activity.SplashActivity}
+</code></pre>
+<p>com.tencent.mobileqq: 包名</p>
+<p>com.tencent.mobileqq.activity.SplashActivity： Activity名</p>
+</blockquote>
+</li>
+<li>
+<p>内存信息：<code>adb shell dumpsys meminfo</code></p>
+</li>
+<li>
+<p>电池信息：<code>adb shell dumpsys battery</code></p>
+</li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE">配置</a></li>
+<li><a href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">常用命令</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/theotop97" target="_blank">Gridea</a>
+  <a class="rss" href="https://theotop97.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
