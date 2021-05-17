@@ -1,22 +1,104 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://theotop97.github.io</id>
-    <title>Theo&apos;s Blogs</title>
-    <updated>2021-05-17T16:36:39.104Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://theotop97.github.io"/>
-    <link rel="self" href="https://theotop97.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
-    <logo>https://theotop97.github.io/images/avatar.png</logo>
-    <icon>https://theotop97.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, Theo&apos;s Blogs</rights>
-    <entry>
-        <title type="html"><![CDATA[移动测试--Monkey的使用]]></title>
-        <id>https://theotop97.github.io/post/Android-Monkey/</id>
-        <link href="https://theotop97.github.io/post/Android-Monkey/">
-        </link>
-        <updated>2021-05-17T16:33:55.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="monkey基础知识">Monkey基础知识</h1>
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>移动测试--Monkey的使用 | Theo&#39;s Blogs</title>
+<link rel="shortcut icon" href="https://theotop97.github.io/favicon.ico?v=1621269397316">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://theotop97.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="移动测试--Monkey的使用 | Theo&#39;s Blogs - Atom Feed" href="https://theotop97.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="Monkey基础知识
+1.1 Monkey概况
+在Android的官方自动化测试领域有一只非常著名的“猴子”叫Monkey，这只“猴子”一旦启动，就会让被测的Android应用程序像 猴子一样活蹦乱跳，到处乱跑。人们常用这只“猴子”来对被测..." />
+    <meta name="keywords" content="Android,Test" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://theotop97.github.io">
+  <img class="avatar" src="https://theotop97.github.io/images/avatar.png?v=1621269397316" alt="">
+  </a>
+  <h1 class="site-title">
+    Theo&#39;s Blogs
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              移动测试--Monkey的使用
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-05-18
+              </span>
+              <span>
+                10 min read
+              </span>
+              
+                <a href="https://theotop97.github.io/tag/FARzCQ5rR/" class="post-tag">
+                  # Android
+                </a>
+              
+                <a href="https://theotop97.github.io/tag/EvORVWVs0/" class="post-tag">
+                  # Test
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="monkey基础知识">Monkey基础知识</h1>
 <h2 id="11-monkey概况">1.1 Monkey概况</h2>
 <p>在Android的官方自动化测试领域有一只非常著名的“猴子”叫Monkey，这只“猴子”一旦启动，就会让被测的Android应用程序像 猴子一样活蹦乱跳，到处乱跑。人们常用这只“猴子”来对被测程序进行压力测试，检查和评估被测程序的稳定性。</p>
 <p>Android官方对这只“猴子”的描述是这样的:Monkey是Google提供的一个命令行工具，可运行在模拟器或实际设备中。它向系 统发送伪随机的用户事件，模拟用户的按键输入、触摸屏输入、手势输入等，从而对正在运行的应用程序进行压力测试，目的是 看设备多长时间会出现异常，并观察系统的稳定性和容错性能。</p>
@@ -207,128 +289,93 @@
 </tr>
 </tbody>
 </table>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[移动测试--adb命令使用]]></title>
-        <id>https://theotop97.github.io/post/test-android/</id>
-        <link href="https://theotop97.github.io/post/test-android/">
-        </link>
-        <updated>2021-05-15T15:37:12.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="简介">简介</h1>
-<p>adb ( Android Debug Bridge)是一个通用命令行工具，其允许您与模拟器实例或连接的 Android 设备进行通信。它可为各种设备操作提供便利，如安装和调试应用。</p>
-<h1 id="配置">配置</h1>
-<p>需要配置adb环境，根据个人机器和喜好配置即可。</p>
-<h1 id="常用命令">常用命令</h1>
-<p><strong>启停服务</strong></p>
-<ul>
-<li><code>adb kill-server</code></li>
-<li><code>adb start-server</code></li>
-</ul>
-<p><strong>查看已连接的设备</strong></p>
-<ul>
-<li><code>adb devices</code></li>
-</ul>
-<p><strong>获取设备的状态</strong></p>
-<ul>
-<li>
-<p><code>adb get-state</code></p>
-<blockquote>
-<p>设备的状态有 3 种：</p>
-<p>​		<code>device</code>：设备正常连接</p>
-<p>​		<code>offline</code>：连接出现异常，设备无响应</p>
-<p>​		<code>unknown</code>：没有连接设备</p>
-</blockquote>
-</li>
-</ul>
-<p><strong>查看设备安装的应用</strong></p>
-<ul>
-<li>
-<p><code>adb shell pm list package xxx(应用名)</code></p>
-<ul>
-<li>-s: 列出系统应用</li>
-<li>-3: 列出第三方应用</li>
-<li>-f: 列出应用包名及对应的apk名及存放位置</li>
-<li>-i: 列出应用包名及其安装来源，结果显示例子</li>
-</ul>
-<blockquote>
-<p>命令最后增加 FILTER：过滤关键字，可以很方便地查找自己想要的应用</p>
-<pre><code class="language-shell">adb shell pm list package -f -3 -i qq  
 
-package:/mnt/asec/com.tencent.mobileqq-bkqW0nLSfyRsIjb5/base.apk=com.tencent.mobileqq installer=com.samsung.android.packageinstaller
-</code></pre>
-</blockquote>
-</li>
-<li>
-<p><code>pm path</code> 列出对应包名的 .apk 位置</p>
-<pre><code class="language-shell">adb shell pm path com.tencent.mobileqq
-package:/mnt/asec/com.tencent.mobileqq-bkqW0nLSfyRsIjb5/base.apk
-</code></pre>
-</li>
-</ul>
-<p><strong>给设备安装应用</strong></p>
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#monkey%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">Monkey基础知识</a>
 <ul>
-<li>
-<p><code>adb install</code></p>
-<blockquote>
-<p><code>-r:</code> 覆盖原安装文件</p>
-<p><code>-s:</code>指定设备</p>
-</blockquote>
+<li><a href="#11-monkey%E6%A6%82%E5%86%B5">1.1 Monkey概况</a></li>
+<li><a href="#12-monkey%E5%8F%82%E6%95%B0">1.2 Monkey参数</a>
 <ul>
-<li>
-<p><strong>默认安装</strong></p>
-<p><code>adb install /xxxxx/xxxxx/xxx.apk</code></p>
+<li><a href="#121-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E7%B1%BB%E5%8F%82%E6%95%B0">1.2.1 基本配置类参数</a></li>
+<li><a href="#122-%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B%E5%92%8C%E9%A2%91%E7%8E%87%E5%8F%82%E6%95%B0">1.2.2 事件类型和频率参数</a></li>
+<li><a href="#123-%E7%BA%A6%E6%9D%9F%E9%99%90%E5%88%B6%E7%B1%BB%E5%8F%82%E6%95%B0">1.2.3 约束限制类参数</a></li>
+<li><a href="#124-%E8%B0%83%E8%AF%95%E7%B1%BB%E5%8F%82%E6%95%B0">1.2.4 调试类参数</a></li>
+<li><a href="#125-%E5%AE%98%E6%96%B9%E9%9A%90%E8%97%8F%E7%B1%BB%E5%8F%82%E6%95%B0">1.2.5 官方隐藏类参数</a></li>
+</ul>
 </li>
 </ul>
 </li>
 </ul>
-<p><strong>卸载设备应用</strong></p>
-<ul>
-<li>
-<p><code>adb uninstall packagename</code></p>
-<blockquote>
-<p>adb uninstall com.tencent.mobileqq</p>
-</blockquote>
-</li>
-</ul>
-<p><strong>文件从PC push到设备</strong></p>
-<ul>
-<li><code>adb push /Users/kyb.txt /sdcard</code></li>
-</ul>
-<p><strong>文件从设备pull到PC</strong></p>
-<ul>
-<li><code>adb pull /sdcard/server.log /Users</code></li>
-</ul>
-<blockquote>
-<p>图片不要用<code>.jpg</code></p>
-</blockquote>
-<p><strong>屏幕截图</strong></p>
-<ul>
-<li><code>adb shell screencap 截图存放截图位置</code></li>
-</ul>
-<blockquote>
-<p><code>adb shell screencap /sdcard/screen.png</code></p>
-</blockquote>
-<p><strong>dumpsys工具</strong></p>
-<ul>
-<li>
-<p>activity栈信息：<code>adb shell dumpsys activity</code></p>
-<blockquote>
-<p>查看当前活动的Activity</p>
-<pre><code class="language-shell">adb shell dumpsys window windows | grep &quot;mCurrentFocus&quot;
-mCurrentFocus=Window{7ba82b1 u0 com.tencent.mobileqq/com.tencent.mobileqq.activity.SplashActivity}
-</code></pre>
-<p>com.tencent.mobileqq: 包名</p>
-<p>com.tencent.mobileqq.activity.SplashActivity： Activity名</p>
-</blockquote>
-</li>
-<li>
-<p>内存信息：<code>adb shell dumpsys meminfo</code></p>
-</li>
-<li>
-<p>电池信息：<code>adb shell dumpsys battery</code></p>
-</li>
-</ul>
-]]></content>
-    </entry>
-</feed>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://theotop97.github.io/post/test-android/">
+              <h3 class="post-title">
+                移动测试--adb命令使用
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/theotop97" target="_blank">Gridea</a>
+  <a class="rss" href="https://theotop97.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
