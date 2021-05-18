@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://theotop97.github.io</id>
     <title>Theo&apos;s Blogs</title>
-    <updated>2021-05-17T16:36:39.104Z</updated>
+    <updated>2021-05-18T16:33:28.687Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://theotop97.github.io"/>
     <link rel="self" href="https://theotop97.github.io/atom.xml"/>
@@ -207,6 +207,236 @@
 </tr>
 </tbody>
 </table>
+<h2 id="13-monkey事件">1.3 Monkey事件</h2>
+<p>Monkey所执行的随机事件流中包含11大事件，分别是触摸事件、手势事件、二指缩放事件、轨迹事件、屏幕旋转事件、基 本导航事件、主要导航事件、系统按键事件、启动Activity事件、键盘事件、其他类型事件。Monkey通过这11大事件来模拟用户 的常规操作，对手机App进行稳定性测试。</p>
+<h3 id="131-触摸事件">1.3.1 触摸事件</h3>
+<p>触摸事件是指在屏幕某处按下并抬起的操作，可通过--pct-touch参数来配置其事件百分比。从Monkey执行该事件对外输出的</p>
+<p>日志可以看到:</p>
+<pre><code>:Sending Touch (ACTION_DOWN): 0,(444.0,1716.0) 
+:Sending Touch (ACTION_UP): 0,(447.18365,1728,0087)
+</code></pre>
+<p>该事件由一组Touch(ACTION_DOWN)和Touch(ACTION_UP)事件组成，在手机上看到实际操作类似于点击。</p>
+<h3 id="132-手势事件">1.3.2 手势事件</h3>
+<p>手势事件是指在屏幕某处的按下、随机移动、抬起的操作，即直线滑动操作。可通过--pct-motion参数来配置其事件百分比。 从Monkey执行该事件对外输出的日志可以看到:</p>
+<pre><code>:Sending Touch (ACTION_DOWN): 0:(282.0,750.0) 
+:Sending Touch (ACTION_MOVE): 0:(281.0507,745.5253) 
+:Sending Touch (ACTION_MOVE): 0:(274.9443,743.3276) 
+:Sending Touch (ACTION_MOVE): 0:(269.18774,738.50525) 
+:Sending Touch (ACTION_MOVE): 0:(260.14917,733.6212) 
+:Sending Touch (ACTION_UP): 0:(254.1414,730.6132)
+</code></pre>
+<p>该事件是由一个ACTION_DOWN事件、一系列ACTION_MOVE事件和一个ACTION_UP事件组成的，在手机上看到的实际操 作是一个没有拐弯的直线滑动操作。</p>
+<h3 id="133-二指缩放事件">1.3.3 二指缩放事件</h3>
+<p>二指缩放事件是指在屏幕上的两处同时按下，并同时移动，最后同时抬起的操作，即智能机上的放大缩小手势操作。可通</p>
+<p>过--pct-pinchzoom参数来配置其事件百分比。从Monkey执行该事件对外输出的日志可以看到:</p>
+<pre><code>:Sending Touch (ACTION_DOWN): 0:(274.0,193.0)
+:Sending Touch (ACTION_POINTER_DOWN 1): 0:(272.80875,198.17978) 1:(26.0,312.0) 
+:Sending Touch (ACTION_MOVE): 0:(251.31396,198.5104) 1:(24.973522,308.64676)
+:Sending Touch (ACTION_MOVE): 0:(240.28494,202.44012) 1:(23.442032,307.8576)
+:Sending Touch (ACTION_MOVE): 0:(221.90855,206.75597) 1:(22.903313,306.47507) 
+:Sending Touch (ACTION_MOVE): 0:(210.28592,212.24286) 1:(17.78174,303.11304)
+:Sending Touch (ACTION_POINTER_UP 1): 0:(171.06334,236.1724) 1:(10.3147135,293.79877) :Sending Touch (ACTION_UP): 0:(161.06638,240.22447)
+</code></pre>
+<p>该事件起始是一个ACTION_DOWN事件和一个ACTION_POINTER_DOWN事件，即模拟两个手指同时点下;中间是一系列 的ACTION_MOVE事件，即两个手指同时在屏幕上直线滑动;结束是由一个ACTION_POINTER_UP事件和一个ACTION_UP事件 组成的，即两个手指同时放开。</p>
+<h3 id="134-轨迹事件">1.3.4 轨迹事件</h3>
+<p>轨迹事件是由一个或多个随机的移动组成的，有时会伴随着点击。很早之前的Android手机带有轨迹球，这个事件就是模拟 的轨迹球的操作。现在的手机几乎都没有轨迹球，但轨迹球事件中包含曲线滑动操作，如果被测程序需要曲线滑动时可以选用此 参数。可通过--pct-trackball参数来配置其事件百分比。从Monkey执行该事件对外输出的日志可以看到:</p>
+<pre><code>:Sending Trackball (ACTION_MOVE): 0:(2.0,3.0)
+:Sending Trackball (ACTION_MOVE): 0:(-1.0,4.0) 
+:Sending Trackball (ACTION_MOVE): 0:(2.0,-3.0)
+</code></pre>
+<p>该事件是由一系列的Trackball(ACTION_MOVE)事件组成的，观察手机上的操作，即为一系列的曲线滑动操作。</p>
+<h3 id="135-屏幕旋转事件">1.3.5 屏幕旋转事件</h3>
+<p>屏幕旋转事件是一个隐藏事件，在Android官方文档中并没有记录这个事件。它其实是模拟的Android手机的横屏和竖屏切 换。可通过--pct-rotation参数来配置其事件百分比。从Monkey执行该事件对外输出的日志可以看到:</p>
+<pre><code>:Sending rotation degree=1, persist=false 
+:Sending rotation degree=3, persist=true 
+:Sending rotation degree=2, persist=true 
+:Sending rotation degree=0, persist=true
+</code></pre>
+<p>该事件由一个rotation事件组成，其中degree表示的是旋转方向，顺时针旋转，0表示旋转90度的方向，1表示旋转180度的方 向，2表示旋转270度的方向，3表示旋转360度的方向。在执行过程中，可以看到手机屏幕在横竖屏之间不断地切换。</p>
+<h3 id="136-基本导航事件">1.3.6 基本导航事件</h3>
+<p>基本导航事件是指点击方向输入设备的上、下、左、右按键的操作，现在手机上很少有上、下、左、右按键，这种事件一般 用得比较少。可通过--pct-nav参数来配置其事件百分比。从Monkey执行该事件对外输出的日志可以看到:</p>
+<pre><code>:Sending Key (ACTION_DOWN): 19   // KEYCODE_DPAD_UP
+:Sending Key (ACTION_UP): 19     // KEYCODE_DPAD_UP
+:Sending Key (ACTION_DOWN): 20   // KEYCODE_DPAD_DOWN
+:Sending Key (ACTION_UP): 20     // KEYCODE_DPAD_DOWN
+:Sending Key (ACTION_DOWN): 21   // KEYCODE_DPAD_LEFT 
+:Sending Key (ACTION_UP): 21     // KEYCODE_DPAD_LEFT
+:Sending Key (ACTION_DOWN): 22   // KEYCODE_DPAD_RIGHT
+:Sending Key (ACTION_UP): 22     // KEYCODE_DPAD_RIGHT
+</code></pre>
+<p>该事件是由一个Key(ACTION_DOWN)和一个Key(ACTION_UP)组成的，点击的就是上、下、左、右四个方向按键。</p>
+<h3 id="137-主要导航事件">1.3.7 主要导航事件</h3>
+<p>主要导航事件是指点击“主要导航”按键的操作，这些按键通常会导致UI界面中的动作，如5-way键盘的中间键、回退按键、 菜单按键。可通过--pct-majornav参数来配置其事件百分比。从Monkey执行该事件对外输出的日志可以看到:</p>
+<pre><code>:Sending Key (ACTION_DOWN): 23  // KEYCODE_DPAD_CENTER
+:Sending Key (ACTION_UP): 23    // KEYCODE_DPAD_CENTER
+:Sending Key (ACTION_DOWN): 82  // KEYCODE_MENU
+:Sending Key (ACTION_UP): 82    // KEYCODE_MENU
+</code></pre>
+<p>该事件是由一个Key(ACTION_DOWN)和一个Key(ACTION_UP)组成的，点击的按键就是中间键和菜单键。</p>
+<h3 id="138-系统按键事件">1.3.8 系统按键事件</h3>
+<p>系统按键事件是指点击系统保留使用的按键的操作，如点击Home键、返回键、音量调节键等。可通过--pct-syskeys参数来配 置其事件百分比。从Monkey执行该事件对外输出的日志可以看到:</p>
+<pre><code>:Sending Key (ACTION_DOWN): 5   // KEYCODE_CALL
+:Sending Key (ACTION_UP): 5     // KEYCODE_CALL
+:Sending Key (ACTION_DOWN): 4   // KEYCODE_BACK
+:Sending Key (ACTION_UP): 4     // KEYCODE_BACK
+:Sending Key (ACTION_DOWN): 3   // KEYCODE_HOME
+:Sending Key (ACTION_UP): 3     // KEYCODE_HOME
+:Sending Key (ACTION_DOWN): 24  // KEYCODE_VOLUME_UP
+:Sending Key (ACTION_UP): 24    // KEYCODE_VOLUME_UP
+:Sending Key (ACTION_DOWN): 25  // KEYCODE_VOLUME_DOWN
+:Sending Key (ACTION_UP): 25    // KEYCODE_VOLUME_DOWN
+</code></pre>
+<p>该事件是由一个Key(ACTION_DOWN)和一个Key(ACTION_UP)组成的，点击的就是上面说到的几个系统按键。</p>
+<h3 id="139-启动activity事件">1.3.9 启动Activity事件</h3>
+<p>启动Activity事件是指在手机上启动一个Activity的操作。在随机的时间间隔中，Monkey将执行一个startActivity()方法，作为 最大限度上覆盖被测包中全部Activity的一种方法。可通过--pct-appswitch参数来配置其事件百分比。从Monkey执行该事件对外输 出的日志可以看到:</p>
+<pre><code>:Switch: #Intent;action=android.intent.action.MAIN;category=android.intent. category.LAUNCHER;launchFlags=0x10200000;component=com.android.settings/. Settings;end
+// Allowing start of Intent { act=android.intent.action.MAIN cat=[android. intent.category.LAUNCHER] cmp=com.android.settings/.Settings } in package com. android.settings
+</code></pre>
+<p>该事件是由一个Switch操作组成的，从手机上看，上面的操作实际是打开了com.android.settings这个应用的一个 com.android.settings.Settings的Activity界面。</p>
+<h3 id="1310-键盘事件">1.3.10 键盘事件</h3>
+<p>键盘事件主要是一些与键盘相关的操作。比如点击输入框、键盘弹起、点击输入框以外区域、键盘收回等。可通过--pct-flip</p>
+<p>参数来配置其事件百分比。从Monkey执行该事件对外输出的日志可以看到:</p>
+<pre><code>:Sending Flip keyboardOpen=false
+:Sending Flip keyboardOpen=true
+</code></pre>
+<p>如日志所示，这里主要是键盘的打开和关闭操作。</p>
+<h3 id="1311-其他类型事件">1.3.11 其他类型事件</h3>
+<p>其他类型事件包括了除前面提到的10种事件外其他所有的事件，如按键、其他不常用的设备上的按钮等。可通过--pct- anyevent参数来配置其事件百分比。从Monkey执行该事件对外输出的日志可以看到:</p>
+<pre><code>:Sending Key (ACTION_DOWN): 59    // KEYCODE_SHIFT_LEFT
+:Sending Key (ACTION_UP): 59      // KEYCODE_SHIFT_LEFT 
+:Sending Key (ACTION_DOWN): 138   // KEYCODE_F8
+:Sending Key (ACTION_UP): 138     // KEYCODE_F8
+:Sending Key (ACTION_DOWN): 45    // KEYCODE_Q
+:Sending Key (ACTION_UP): 45      // KEYCODE_Q
+:Sending Key (ACTION_DOWN): 192   // KEYCODE_BUTTON_5
+:Sending Key (ACTION_UP): 192     // KEYCODE_BUTTON_5...
+</code></pre>
+<p>该事件是由一个Key(ACTION_DOWN)和一个Key(ACTION_UP)组成的，点击的按键就是其他的一些系统按键，如字 母按键、数字按键等。因为现在手机很少带字母按键或数字按键，所以这个事件一般使用得比较少。</p>
+<h2 id="14-monkey启动">1.4 Monkey启动</h2>
+<p>Monkey启动方式很简单:先连接被测手机到PC上，然后打开CMD命令行窗口输入对应的adb命令行即可。通过命令行启动Monkey有两种方式:</p>
+<ul>
+<li>直接PC启动</li>
+</ul>
+<pre><code>&gt; adb shell monkey [options] &lt;count&gt;
+</code></pre>
+<ul>
+<li>Shell端启动</li>
+</ul>
+<pre><code>&gt;adb shell
+&gt;monkey [options] &lt;count&gt;
+</code></pre>
+<p>这两者的区别是，通过PC端启动，Monkey运行日志可以保存在PC上;通过Shell端启动，Monkey运行日志可以保存在手机里</p>
+<blockquote>
+<p>Monkey启动后会不断地向被测对象发送随机事件流，直到事件执行完毕或者发生异常时才停止。在Monkey运行过程中，即便断开 与PC的连接，Monkey依然可以在手机上继续运行。</p>
+</blockquote>
+<p>停止Monkey的方法是:直接杀掉手机上的Monkey进程。具体方法如下:</p>
+<pre><code>&gt;adb shell ps |grep monkey
+</code></pre>
+<p>获取到com.android.commands.monkey的进程ID</p>
+<pre><code>&gt;adb shell kill pid
+</code></pre>
+<p>下面来看一个最简单的Monkey命令行示例:</p>
+<pre><code>&gt; adb shell monkey -v 10
+</code></pre>
+<p>通过该命令启动Monkey后，Monkey向被测手机的Android系统发送10条随机事件流。当启动运行Monkey测试后，手机上会开始执行Monkey测试， 同时在命令行窗口输出日志，执行完成后，可以看到Monkey的日志信息</p>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2021/05/19/pgHnoYwGPBF1xv4.png" alt="image.png" loading="lazy"></figure>
+<h2 id="15-monkey测试方法">1.5 Monkey测试方法</h2>
+<h3 id="151-monkey测试实例">1.5.1 Monkey测试实例</h3>
+<p><strong>1.常规的稳定性测试</strong></p>
+<p>被测程序是Android应用(App)，希望通过Monkey来模拟用户长时间的随机操作，检查被测应用是否会出现异常(应用崩溃或者无响应)。</p>
+<p>测试脚本:</p>
+<pre><code>adb shell monkey -p com.xxx.xxx --pct-touch 40 --pct-motion 25 --pct-appswitch 10 --pct-rotation 5 -s 12358 --throttle 400 --ignore-crashes --ignore-timeouts -v 500000
+</code></pre>
+<p>显而易见，这个Monkey测试的命令相比上一节提到的要复杂得多，主要是对一些操作事件做了限制，从而减少了Monkey伪随机化的无效操作。这体现在以下几个方面。</p>
+<p>1)使用-p参数来制定测试应用的包名(Package)</p>
+<p>因为被测程序是一个特定的Android应用程序，需要指定被测程序的包名。指定包名后，Monkey会根据包名找到对应的应用，并启动其main activity，然后执行Monkey测试。</p>
+<p>2)使用--pct-xxx参数限制Monkey执行的事件类型和占比</p>
+<p>前面已经说了，这个测试的目的是希望模拟用户操作，因此需要让Monkey执行的事件尽可能地接近用户的常规操作，这样才可以 最大限度地发现用户使用过程中可能出现的问题。因此需要对Monkey执行的事件百分比做一些调整。</p>
+<p>触摸事件和手势事件是用户最常见的操作，所以通过--pct-touch和--pct-motion将这两个事件的占比调整到40%与25%;目标应用包 含了多个Activity，为了能覆盖大部分的Activity，所以通过--pct-appswitch将Activity切换的事件占比调整到10%;被测应用之前在测试中 出现过不少横竖屏之间切换的问题，这个场景也必须关注，因此通过--pct-rotation把横竖屏切换事件调整到10%。</p>
+<p>3)使用-s参数来指定命令执行的seed值</p>
+<p>Monkey会根据seed值来生成对应事件流，同一个seed生成的事件流是完全相同的。这里指定了seed值，是为了测试发现问题时，便于进行问题复现。</p>
+<p>4)使用--throttle参数来控制Monkey每个操作之间的时间间隔</p>
+<p>指定操作之间的时间间隔，一方面是希望能更接近用户的操作场景，正常用户操作都会有一定的时间间隔;另一方面也是不希望 因为过于频繁的操作而导致系统崩溃，尤其是在比较低端的手机上执行测试时。因此通过--throttle设置Monkey每个操作固定延迟0.4 秒。</p>
+<p>5)使用--ignore-crash和--ignore-timeouts参数使Monkey遇到意外时能继续执行</p>
+<p>在执行Monkey测试时，会因为应用的崩溃或没有响应而意外终止，所以需要在命令中增加限制参数--ignore-crash和--ignore-timeouts，让Monkey在遇到崩溃或没有响应的时候，能在日志中记录相关信息，并继续执行后续的测试。</p>
+<p>6)使用-v指定log的详细级别</p>
+<p>Monkey的日志输出有3个级别:默认的是level 0，-v日志级别为level 1，-v-v日志级别为level 2。日志的级别越高，其详细程度也越高。为了方便问题的定位，将日志级别设置为level2。</p>
+<p>在常规的稳定性测试中，虽然可以自定义各种事件的操作占比，但毕竟是随机事件流。在实际测试过程中，难免会遇到Monkey点了我们不希望它点击的地方，比如误点了工具栏导致网络断开的情况等。后续会介绍如何解决wifi重连的问题。</p>
+<p><strong>2.自定义脚本的稳定性测试</strong></p>
+<p>常规Monkey测试执行的是随机的事件流，但如果只是想让Monkey测试某个特定场景(执行固定的事件流)呢?这时候就需要用 到自定义脚本了，Monkey支持执行用户自定义脚本的测试，用户只需要按照Monkey脚本的规范编写好脚本，存放到手机上，启动 Monkey通过-f scriptfile参数调用脚本即可。</p>
+<pre><code>#头文件，控制Monkey发送消息的参数，固定写即可
+#脚本类型，一般不用更改
+type=raw events 
+#脚本执行次数，但是由于Monkey命令本身可以指定执行次数，所以这里的设置是不生效的 
+count=10
+#命令执行速率，速率也可以通过 Monkey命令设置，这里的设置是不生效的
+speed=1.0 
+#以下为Monkey命令 
+start data&gt;&gt;
+LaunchActivity( pkg_name,cl_name)
+DispatchPress(KEYCODE_HOME)...
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LaunchActivity(Pkg_name,cl_name)</td>
+<td>启动被测应用的某个Activity<br/>Pkg_ name:包名<br/>cl name: Activity 名</td>
+</tr>
+<tr>
+<td>Tap(x,y,tapDuration)</td>
+<td>模拟一次手指单击事件<br/>X:<br/>点击的横坐标<br/>y:点击的纵坐标</td>
+</tr>
+<tr>
+<td>DispatchPress(KeyName)</td>
+<td>模拟按键点击<br/>keyName:按键的名称</td>
+</tr>
+<tr>
+<td>RotateScreen(rotationDegree,peresist)</td>
+<td>模拟旋转屏幕<br/>rotationDegree:用0 ~ 3分别表示顺时针旋转的四个方向<br/>peresist:是否存留</td>
+</tr>
+<tr>
+<td>DispatchFlip(true/false)</td>
+<td>打开或关闭软键盘</td>
+</tr>
+<tr>
+<td>LongPress()</td>
+<td>长按两秒</td>
+</tr>
+<tr>
+<td>PressAndHold(x,y,pressDuration)</td>
+<td>模拟长按事件:即单指按下一段时间， 再抬起<br/>X:点击的横坐标<br/>y:点击的纵坐标<br/>pressDuration:点击时长，单位是ms</td>
+</tr>
+<tr>
+<td>DispatchString(input)</td>
+<td>输入字符串<br/>input:输入内容</td>
+</tr>
+<tr>
+<td>Drag(xStrat,yStart,xEnd,yEnd,stepCount)</td>
+<td>模拟拖动操作:即单指按下、拖动、放开<br/>xStart、yStart:起始的横坐标和纵坐标<br/>xEnd、yEnd:结束的横坐标和纵坐标<br/>stepCount:移动的事件数(可理解为移动速度)</td>
+</tr>
+<tr>
+<td>PinchZoom(pt1xStart,pt1yStart,<br/>pt1xEnd,pt1yEnd,pt2xStart,pt2yStart,<br/>pt2xEnd,pt2yEnd,stepCount)</td>
+<td>模拟缩放手势:即两个手指同时按下并移动，再同时放开<br/>pt1xStart、ptlyStart: 手指1起始的横坐标和纵坐标<br/>pt1xEnd、pt1yEnd: 手指1结束的横坐标和纵坐标<br/>pt2xStart、pt2yStart: 手指2起始的横坐标和纵坐标<br/>pt2xEnd、pt2yEnd:手指2结束的横坐标和纵坐标<br/>stepCount:移动的事件数(可理解为移动速度,stepCount越大移动速度越慢)</td>
+</tr>
+<tr>
+<td>UserWait(sleepTime)</td>
+<td>设置等待时间<br/>sleepTime:等待的时间，单位是ms</td>
+</tr>
+<tr>
+<td>DeviceWakeUp()</td>
+<td>唤醒屏幕</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Monkey脚本只能通过坐标的方式来定位点击和移动事件的屏幕位置，这里就需要提前获取坐标信息。获取坐标信 息的方法很多，最简单的方法就是打开手机中的开发人员选项，打开“显示指针位置”。随后，在屏幕上的每次操作，在导航栏上都会 显示坐标信息。</p>
+</blockquote>
 ]]></content>
     </entry>
     <entry>
