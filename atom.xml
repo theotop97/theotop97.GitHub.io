@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://theotop97.github.io</id>
     <title>Theo&apos;s Blogs</title>
-    <updated>2021-05-18T16:35:32.738Z</updated>
+    <updated>2021-05-22T17:43:08.985Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://theotop97.github.io"/>
     <link rel="self" href="https://theotop97.github.io/atom.xml"/>
@@ -11,7 +11,60 @@
     <icon>https://theotop97.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Theo&apos;s Blogs</rights>
     <entry>
-        <title type="html"><![CDATA[移动测试--Monkey的使用]]></title>
+        <title type="html"><![CDATA[TestNG集成allure]]></title>
+        <id>https://theotop97.github.io/post/testng-ji-cheng-allure/</id>
+        <link href="https://theotop97.github.io/post/testng-ji-cheng-allure/">
+        </link>
+        <updated>2021-05-22T14:04:28.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="1-maven">1 Maven</h2>
+<h3 id="11-指定testngxml的路径">1.1 指定testng.xml的路径</h3>
+<pre><code class="language-shell">mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/testng.xml
+</code></pre>
+<h3 id="12-生成allure报告">1.2 生成allure报告</h3>
+<ul>
+<li>
+<p>生成在线html，ctrl+c终止后会无法访问：</p>
+<pre><code class="language-shell">mvn io.qameta.allure:allure-maven:serve
+</code></pre>
+<ul>
+<li>
+<p>当配置好了allure环境后，可使用如下方式：</p>
+<pre><code class="language-shell">allure serve allure-results
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>生成本地html文件(需要配置allure环境)</p>
+<pre><code class="language-shell">allure generate --clean target/allure-results 
+</code></pre>
+</li>
+</ul>
+<h2 id="2-gradle">2 Gradle</h2>
+<ul>
+<li>
+<p>生成allure-results(allure自己收集的数据，以json文件保存),build.gradle需要配置useTestNg</p>
+<pre><code>gradlew clean test
+</code></pre>
+</li>
+<li>
+<p>生成在线报告</p>
+<blockquote>
+<p>根据自己工程的目录来编写路径</p>
+</blockquote>
+<pre><code>allure serve test-case/allure-results
+</code></pre>
+</li>
+<li>
+<p>生成本地报告</p>
+<pre><code>allure generate test-case/allure-results report --clean -o test-case/allure-report
+</code></pre>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Monkey的使用]]></title>
         <id>https://theotop97.github.io/post/Android-Monkey/</id>
         <link href="https://theotop97.github.io/post/Android-Monkey/">
         </link>
@@ -435,12 +488,12 @@ DispatchPress(KEYCODE_HOME)...
 </tbody>
 </table>
 <blockquote>
-<p>Monkey脚本只能通过坐标的方式来定位点击和移动事件的屏幕位置，这里就需要提前获取坐标信息。获取坐标信 息的方法很多，最简单的方法就是打开手机中的开发人员选项，打开“显示指针位置”。随后，在屏幕上的每次操作，在导航栏上都会 显示坐标信息。</p>
+<p>Monkey脚本只能通过坐标的方式来定位点击和移动事件的屏幕位置，这里就需要提前获取坐标信息。获取坐标信息的方法很多，最简单的方法就是打开手机中的开发人员选项，打开“显示指针位置”。随后，在屏幕上的每次操作，在导航栏上都会显示坐标信息。</p>
 </blockquote>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[移动测试--adb命令使用]]></title>
+        <title type="html"><![CDATA[adb的使用]]></title>
         <id>https://theotop97.github.io/post/test-android/</id>
         <link href="https://theotop97.github.io/post/test-android/">
         </link>

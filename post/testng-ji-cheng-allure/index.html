@@ -2,19 +2,23 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | Theo&#39;s Blogs</title>
+<title>TestNG集成allure | Theo&#39;s Blogs</title>
 <link rel="shortcut icon" href="https://theotop97.github.io/favicon.ico?v=1621692410340">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://theotop97.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | Theo&#39;s Blogs - Atom Feed" href="https://theotop97.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="TestNG集成allure | Theo&#39;s Blogs - Atom Feed" href="https://theotop97.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="
-这个人很神秘，江湖上还没有关于他的故事......
+    <meta name="description" content="1 Maven
+1.1 指定testng.xml的路径
+mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/testng.xml
 
-" />
+1.2 生成allure报告
+
+
+生成在线..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -77,11 +81,11 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              TestNG集成allure
             </h2>
             <div class="post-info">
               <span>
-                2021-05-16
+                2021-05-22
               </span>
               <span>
                 1 min read
@@ -91,18 +95,82 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>这个人很神秘，江湖上还没有关于他的故事......</p>
+                <h2 id="1-maven">1 Maven</h2>
+<h3 id="11-指定testngxml的路径">1.1 指定testng.xml的路径</h3>
+<pre><code class="language-shell">mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/testng.xml
+</code></pre>
+<h3 id="12-生成allure报告">1.2 生成allure报告</h3>
+<ul>
+<li>
+<p>生成在线html，ctrl+c终止后会无法访问：</p>
+<pre><code class="language-shell">mvn io.qameta.allure:allure-maven:serve
+</code></pre>
+<ul>
+<li>
+<p>当配置好了allure环境后，可使用如下方式：</p>
+<pre><code class="language-shell">allure serve allure-results
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>生成本地html文件(需要配置allure环境)</p>
+<pre><code class="language-shell">allure generate --clean target/allure-results 
+</code></pre>
+</li>
+</ul>
+<h2 id="2-gradle">2 Gradle</h2>
+<ul>
+<li>
+<p>生成allure-results(allure自己收集的数据，以json文件保存),build.gradle需要配置useTestNg</p>
+<pre><code>gradlew clean test
+</code></pre>
+</li>
+<li>
+<p>生成在线报告</p>
+<blockquote>
+<p>根据自己工程的目录来编写路径</p>
 </blockquote>
+<pre><code>allure serve test-case/allure-results
+</code></pre>
+</li>
+<li>
+<p>生成本地报告</p>
+<pre><code>allure generate test-case/allure-results report --clean -o test-case/allure-report
+</code></pre>
+</li>
+</ul>
 
               </div>
               <div class="toc-container">
-                
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#1-maven">1 Maven</a>
+<ul>
+<li><a href="#11-%E6%8C%87%E5%AE%9Atestngxml%E7%9A%84%E8%B7%AF%E5%BE%84">1.1 指定testng.xml的路径</a></li>
+<li><a href="#12-%E7%94%9F%E6%88%90allure%E6%8A%A5%E5%91%8A">1.2 生成allure报告</a></li>
+</ul>
+</li>
+<li><a href="#2-gradle">2 Gradle</a></li>
+</ul>
+</li>
+</ul>
+
               </div>
             </div>
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://theotop97.github.io/post/Android-Monkey/">
+              <h3 class="post-title">
+                Monkey的使用
+              </h3>
+            </a>
+          </div>
         
 
         
