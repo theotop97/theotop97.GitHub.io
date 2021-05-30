@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://theotop97.github.io</id>
     <title>Theo&apos;s Blogs</title>
-    <updated>2021-05-22T17:43:08.985Z</updated>
+    <updated>2021-05-30T16:44:44.598Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://theotop97.github.io"/>
     <link rel="self" href="https://theotop97.github.io/atom.xml"/>
@@ -490,6 +490,114 @@ DispatchPress(KEYCODE_HOME)...
 <blockquote>
 <p>Monkey脚本只能通过坐标的方式来定位点击和移动事件的屏幕位置，这里就需要提前获取坐标信息。获取坐标信息的方法很多，最简单的方法就是打开手机中的开发人员选项，打开“显示指针位置”。随后，在屏幕上的每次操作，在导航栏上都会显示坐标信息。</p>
 </blockquote>
+<p>下面来看一个简单的例子:</p>
+<p>这里要测试的是“设置”，测试的操作是打开“设置”，点击输入框，输入“theo”，点击搜索。搜索完成后，点击返回键返回应用宝首页。</p>
+<p>首先，将在本地编写需要的测试脚本命名为monkey.script(文件格式无要求)，脚本内容如下</p>
+<pre><code class="language-shell">#启动测试
+type = user 
+count = 49 
+speed = 1.0 
+start data &gt;&gt; 
+
+
+#启动应用宝
+LaunchActivity(com.android.settings,com.android.settings.Settings) 
+UserWait(2000)
+
+
+#点击搜索按钮
+Tap(840,820,500) 
+UserWait(2000) 
+
+
+#点击搜索栏
+Tap(200,150,1000)
+
+
+#输入字母“theo”
+DispatchString(theo) 
+UserWait(2000) 
+
+
+#点击搜索
+Tap(975,2060,1000) 
+UserWait(2000) 
+
+
+#点击返回键返回首页
+DispatchPress(KEYCODE_BACK)
+</code></pre>
+<p>将文件push到手机或模拟器中，最后，执行脚本</p>
+<pre><code class="language-shell">adb shell monkey -f /sdcard/monkey.script –v 1
+</code></pre>
+<p>在手机上我们可以看到，Monkey脚本按照我们的设计的脚本执行了相应的动作。</p>
+<blockquote>
+<p>如果需要重复执行某个脚本，只要在Monkey启动命令中修改执行次数即可。例如:</p>
+<pre><code class="language-shell">adb shell monkey -f /sdcard/monkey.script –v 10
+</code></pre>
+<p>此时Monkey会重复执行monkey.script脚本10次。</p>
+</blockquote>
+<p><strong>3.结合辅助命令，获取更多信息</strong></p>
+<p>常规测试只要记录下Monkey日志，再分析Monkey日志检查是否有异常即可。但是，很多时候，测试除了想知道执行过程是否有异常，还需要能获取执行过程中的一些详细信息或性能数据，比如想知道Monkey执行过程中是否存在内存泄漏，需要获取内存信息。 这时候就需要借助一些辅助的命令来获取更多信息了。下面列举了几种Monkey测试中常用的辅助命令，使用方法也非常简单，只要在 执行Monkey的同时，另起一个命令行窗口输入对应命令执行即可</p>
+<ul>
+<li>获取logcat日志信息:</li>
+</ul>
+<pre><code>adb shell logcat -v time&gt;log.txt
+</code></pre>
+<ul>
+<li>获取内存信息:</li>
+</ul>
+<pre><code>adb shell dumpsys meminfo &lt;进程名&gt;
+</code></pre>
+<ul>
+<li>获取CPU消耗信息:</li>
+</ul>
+<pre><code>adb shell dumpsys cpuinfo &lt;进程名&gt;
+</code></pre>
+<ul>
+<li>获取电量信息:</li>
+</ul>
+<pre><code>adb shell dumpsys battery
+</code></pre>
+<ul>
+<li>获取GPU信息:</li>
+</ul>
+<pre><code>adb shell dumpsys gfxinfo &lt;进程名&gt;
+</code></pre>
+<ul>
+<li>获取流量信息:</li>
+</ul>
+<pre><code>#某些厂商的设备上无法使用
+adb shell cat/proc/uid_stat/&lt;被测应用的uid&gt;/tcp_rcv
+</code></pre>
+<blockquote>
+<p>如何获取被测应用的UID</p>
+<p>步骤1:查看被测应用的进程ID(PID)</p>
+<pre><code>adb shell ps | grep &lt;被测应用包名 &gt;
+</code></pre>
+<p>步骤2:查看被测应用的用户ID(UID)</p>
+<pre><code>adb shell cat /proc/$pid/status
+</code></pre>
+</blockquote>
+<h2 id="16-monkey日志分析">1.6 Monkey日志分析</h2>
+<p>Monkey日志分析是Monkey测试中非常重要的一个环节，通过日志分析，可以获取当前测试对象在测试过程中是否会发生异常，以及发生的概率，同时还可以获取对应的错误信息，帮助定位和解决问题。介绍日志分析方法之前，先来看一下日志的保存方法。</p>
+<h3 id="161-monkey日志的保存方法">1.6.1 Monkey日志的保存方法</h3>
+<p>Monkey运行日志常见的保存方法有三种:</p>
+<ul>
+<li>保存在PC中，代码如下:</li>
+</ul>
+<pre><code>adb shell monkey [option] &lt;count&gt; &gt;/home/monkey.txt
+</code></pre>
+<ul>
+<li>保存在手机中，代码如下</li>
+</ul>
+<pre><code>adb shell monkey [option] &lt;count&gt; &gt; /mnt/sdcard/monkey.txt
+</code></pre>
+<ul>
+<li>标注流与错误流分开保存，代码如下</li>
+</ul>
+<pre><code>adb shell monkey [option] &lt;count&gt; 1&gt;/sdcard/monkey.txt 2&gt;/sdcard/error.txt
+</code></pre>
 ]]></content>
     </entry>
     <entry>
